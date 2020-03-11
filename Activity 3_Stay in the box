@@ -1,0 +1,48 @@
+// Task 1 
+// hardware : EV3 MINDSTORM LEGO
+// software : Bricx
+// this coding will move the robot randomly inside the black tape box
+// the light sensor attached to the robot will calibrate the black tape and the white tile
+// before running the codes, view the light sensor value on the robot to obtain the threshold of the white tile and the black tape
+
+
+void move_forwards() {
+  OnFwd(OUT_BC, 75);
+}
+
+void move_backwards() {
+  OnRev(OUT_BC, 75);
+}
+
+void move_left() {
+  OnFwd(OUT_B, 100);
+}
+
+void move_right() {
+  OnFwd(OUT_C, 100);
+}
+
+
+task main() {
+  int x;
+  //SetSensorSound(IN_2);
+  SetSensorLight(IN_1);
+
+  while(true) {
+               while(Sensor(IN_1) >= 35) {
+               move_forwards();
+              }
+              move_backwards();
+              Wait(600);
+              x = Random(2);
+              switch(x)
+                       {
+                        case 0: move_right();
+                                Wait(300);
+                                break;
+                        case 1: move_left();
+                                Wait(300);
+                                break;
+                       }
+              }
+}
